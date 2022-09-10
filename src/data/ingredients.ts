@@ -1,7 +1,15 @@
 import type { Ingredient } from "@/ts";
-import { reactive } from "vue";
+import { computed, reactive } from "vue";
 
-export const ingredientsData = reactive<Ingredient[]>([
+export const ingredientsData = computed(
+  () =>
+    rawIngredientsData.filter((i) => i.name !== undefined) as (Required<
+      Pick<Ingredient, "name">
+    > &
+      Omit<Ingredient, "name">)[]
+);
+
+export const rawIngredientsData = reactive<Ingredient[]>([
   { name: "土豆" },
   { name: "青菜" },
 ]);

@@ -41,31 +41,32 @@ const columns: TableColumns<DelicaciesData> = [
     title: "原料表",
     align: "center",
     key: "ingredients",
-    children: ingredientsData.map((ingred) => ({
-      key: ingred.name,
-      title: ingred.name,
-      width: 70,
-      render(row, rowIndex) {
-        const gradNum = row?.ingredients?.[ingred.name] || "-";
+    children: ingredientsData.value
+      .map((ingred) => ({
+        key: ingred.name,
+        title: ingred.name,
+        width: 70,
+        render(row, rowIndex) {
+          const gradNum = row?.ingredients?.[ingred.name] || "-";
 
-        return h<ShowOrEditProps>(ShowOrEdit, {
-          value: gradNum.toString(),
-          inputProps: {
+          return h<ShowOrEditProps>(ShowOrEdit, {
+            value: gradNum.toString(),
             inputProps: {
-              type: "number",
+              inputProps: {
+                type: "number",
+              },
             },
-          },
-          onUpdateValue(v) {
-            const number = parseFloat(v);
-            if (isNaN(number)) return;
+            onUpdateValue(v) {
+              const number = parseFloat(v);
+              if (isNaN(number)) return;
 
-            delicaciesData[rowIndex].ingredients ??= {};
+              delicaciesData[rowIndex].ingredients ??= {};
 
-            delicaciesData[rowIndex].ingredients![ingred.name] = number;
-          },
-        });
-      },
-    })),
+              delicaciesData[rowIndex].ingredients![ingred.name] = number;
+            },
+          });
+        },
+      })),
   },
   {
     title: "删除",

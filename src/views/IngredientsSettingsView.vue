@@ -1,13 +1,17 @@
 <script lang="ts" setup>
-// import { defineProps } from "vue";
-
-// const props = defineProps<{
-//   name: type;
-// }>();
+import IngredientTable from "../components/IngredientTable.vue";
+import AddOrDropBar from "../components/AddOrDropBar.vue";
+import { rawIngredientsData } from "@/data/ingredients";
 </script>
 
 <template>
-  <div class="ingredients-settings-view">TODO</div>
+  <div class="ingredients-settings-view">
+    <IngredientTable></IngredientTable>
+    <AddOrDropBar
+      :onDrop="() => (rawIngredientsData.length = 0)"
+      :onAdd="() => rawIngredientsData.push({})"
+    ></AddOrDropBar>
+  </div>
 </template>
 
 <style lang="less" scoped>

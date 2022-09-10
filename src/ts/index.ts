@@ -4,7 +4,7 @@ export type DelicaciesData = {
   /** 在什么时候做这餐 */
   schedule?: number;
   /** 本餐需要的原料 */
-  ingredients?: Record<Ingredient["name"], Gram>;
+  ingredients?: Record<string, Gram>;
 };
 
 /** 个/份 */
@@ -14,6 +14,7 @@ export type Gram = number;
 
 /** 原料的类型定义 */
 export type Ingredient = {
-  name: string;
+  name?: string;
   gramPerUnit?: number;
+  lastUsedAt?: number;
 };
