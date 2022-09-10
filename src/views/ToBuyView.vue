@@ -12,6 +12,6 @@
 
 <style lang="less" scoped>
 .to-buy-view {
-  padding: 10px;
+  // padding: 10px;
 }
 </style>

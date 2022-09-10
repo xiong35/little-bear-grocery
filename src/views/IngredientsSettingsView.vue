@@ -12,6 +12,6 @@
 
 <style lang="less" scoped>
 .ingredients-settings-view {
-  padding: 10px;
+  // padding: 10px;
 }
 </style>

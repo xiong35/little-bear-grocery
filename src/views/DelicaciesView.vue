@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import DelicaciesTable from "../components/DelicaciesTable.vue";
 // import { defineProps } from "vue";
 
 // const props = defineProps<{
@@ -7,11 +8,13 @@
 </script>
 
 <template>
-  <div class="delicacies-view">delicacies-view</div>
+  <div class="delicacies-view">
+    <DelicaciesTable></DelicaciesTable>
+  </div>
 </template>
 
 <style lang="less" scoped>
 .delicacies-view {
-  padding: 10px;
+  // padding: 10px;
 }
 </style>

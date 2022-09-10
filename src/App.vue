@@ -20,10 +20,12 @@ import { NTabs, NTab } from "naive-ui";
       <RouterLink :to="{ name: 'ingredients-settings' }">食材设置🥔</RouterLink>
     </NTab>
   </NTabs>
-  <RouterView />
+  <div class="main-page">
+    <RouterView />
+  </div>
 </template>
 
-<style scoped>
+<style lang="less" scoped>
 a {
   color: unset;
   text-decoration: none;
@@ -31,5 +33,22 @@ a {
 
 .n-tabs-tab-wrapper {
   margin: 0 10px;
+}
+
+.main-page {
+  max-width: 500px;
+  margin: auto;
+  padding: 45px 10px 10px;
+}
+
+.n-tabs {
+  position: fixed;
+  top: 0;
+}
+</style>
+
+<style>
+body {
+  min-height: 100vh;
 }
 </style>
