@@ -1,69 +1,69 @@
 <script lang="ts" setup>
-import { h, ref } from "vue";
-import { NDataTable } from "naive-ui";
-import ShowOrEdit from "./ShowOrEdit.vue";
+import { h } from "vue";
+import { NDataTable, NDatePicker } from "naive-ui";
+import ShowOrEdit, { type ShowOrEditProps } from "./ShowOrEdit.vue";
 import type { TableColumns } from "naive-ui/es/data-table/src/interface";
+import { delicaciesData } from "@/data/delicacies";
+import type { DelicaciesData } from "@/ts";
+import { ingredientsData } from "@/data/ingredients";
 
-const createData = () => [
+const columns: TableColumns<DelicaciesData> = [
   {
-    key: 0,
-    name: "John Brown",
-    age: "32",
-    address: "New York No. 1 Lake Park",
-  },
-  {
-    key: 1,
-    name: "Jim Green",
-    age: "42",
-    address: "London No. 1 Lake Park",
-  },
-  {
-    key: 2,
-    name: "Joe Black",
-    age: "32",
-    address: "Sidney No. 1 Lake Park",
-  },
-];
-
-const data = ref(createData());
-const columns: TableColumns<string> = [
-  {
-    title: "Name",
+    title: "菜品",
     key: "name",
-    width: 150,
+    width: 100,
+    align: "center",
     render(row, index) {
       return h(ShowOrEdit, {
         value: row.name,
         onUpdateValue(v) {
-          data.value[index].name = v;
+          delicaciesData[index].name = v;
         },
       });
     },
   },
   {
-    title: "Age",
-    key: "age",
-    width: 100,
+    title: "时间",
+    key: "schedule",
+    align: "center",
+    width: 150,
     render(row, index) {
-      return h(ShowOrEdit, {
-        value: row.age,
+      return h(NDatePicker, {
+        value: row.schedule,
+        size: "small",
         onUpdateValue(v) {
-          data.value[index].age = v;
+          delicaciesData[index].schedule = v;
         },
       });
     },
   },
   {
-    title: "Address",
-    key: "address",
-    render(row, index) {
-      return h(ShowOrEdit, {
-        value: row.address,
-        onUpdateValue(v) {
-          data.value[index].address = v;
-        },
-      });
-    },
+    title: "原料表",
+    align: "center",
+    key: "ingredients",
+    children: ingredientsData.map((ingred) => ({
+      key: ingred.name,
+      title: ingred.name,
+      width: 70,
+      render(row, rowIndex) {
+        const gradNum = row.ingredients[ingred.name] || "-";
+
+        return h<ShowOrEditProps>(ShowOrEdit, {
+          value: gradNum.toString(),
+          inputProps: {
+            inputProps: {
+              type: "number",
+            },
+          },
+          onUpdateValue(v) {
+            const number = parseFloat(v);
+            if (isNaN(number)) return;
+
+            delicaciesData[rowIndex].ingredients[ingred.name] = number;
+          },
+        });
+      },
+    })),
   },
 ];
 </script>
@@ -72,8 +72,18 @@ const columns: TableColumns<string> = [
   <NDataTable
     :key="(row) => row.key"
     :columns="columns"
-    :data="data"
+    striped
+    :data="delicaciesData"
     :pagination="{ pageSize: 10 }"
+    :scrollX="500"
   />
-  <pre>{{ JSON.stringify(data, null, 2) }}</pre>
+  <pre>{{ JSON.stringify(delicaciesData, null, 2) }}</pre>
 </template>
+
+<style lang="less">
+.n-data-table .n-data-table-table.n-data-table-table {
+  word-break: keep-all;
+  width: unset;
+  min-width: 500px;
+}
+</style>

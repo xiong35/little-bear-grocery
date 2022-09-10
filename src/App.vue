@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from "vue-router";
 import { NTabs, NTab } from "naive-ui";
+import { useDelicacies } from "./hooks/delicacies";
+import { delicaciesData } from "./data/delicacies";
+
+useDelicacies(delicaciesData);
 </script>
 
 <template>

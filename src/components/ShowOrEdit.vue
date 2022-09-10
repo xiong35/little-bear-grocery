@@ -1,24 +1,20 @@
 <script lang="ts" setup>
-import { NInput } from "naive-ui";
-import { defineProps, nextTick, ref, type VNodeRef } from "vue";
-
-const props = defineProps<{
+import { NInput, type InputProps } from "naive-ui";
+import { defineProps, ref } from "vue";
+export type ShowOrEditProps = {
   value: string;
   // eslint-disable-next-line no-unused-vars
   onUpdateValue: (s: string) => void;
-}>();
+  inputProps?: InputProps;
+};
+
+const props = defineProps<ShowOrEditProps>();
 
 const isEdit = ref(false);
-const inputRef = ref<VNodeRef | undefined>();
-const inputValue = ref(props.value);
+const inputValue = ref(props.value === "-" ? "" : props.value);
 
 function handleEditStart() {
   isEdit.value = true;
-  nextTick(() => {
-    if (inputRef.value instanceof HTMLInputElement) {
-      inputRef.value.focus();
-    }
-  });
 }
 
 function handleChangeEnd() {
@@ -30,11 +26,14 @@ function handleChangeEnd() {
 <template>
   <NInput
     :value="inputValue"
+    placeholder="🤔"
+    size="small"
     v-if="isEdit"
-    :ref="inputRef"
     @updateValue="(v: string)=> inputValue = v"
-    @change="handleChangeEnd"
     @blur="handleChangeEnd"
+    @vnodeMounted="(v)=> (v.el as HTMLDivElement).querySelector('input')?.focus()"
   ></NInput>
-  <span @dblclick="handleEditStart" v-else>{{ props.value }}</span>
+  <div :style="{ padding: 5 }" @click="handleEditStart" v-else>
+    {{ props.value }}
+  </div>
 </template>
