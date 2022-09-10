@@ -26,7 +26,7 @@ const columns: TableColumns<DelicaciesData> = [
     title: "时间",
     key: "schedule",
     align: "center",
-    width: 110,
+    width: 130,
     render(row, index) {
       return h(NDatePicker, {
         value: row?.schedule,
@@ -59,7 +59,9 @@ const columns: TableColumns<DelicaciesData> = [
             const number = parseFloat(v);
             if (isNaN(number)) return;
 
-            delicaciesData[rowIndex].ingredients[ingred.name] = number;
+            delicaciesData[rowIndex].ingredients ??= {};
+
+            delicaciesData[rowIndex].ingredients![ingred.name] = number;
           },
         });
       },
@@ -90,7 +92,7 @@ const columns: TableColumns<DelicaciesData> = [
 
 <template>
   <NDataTable
-    :key="(row) => row.key"
+    :key="(((row: any) => row.key) as any as string)"
     :columns="columns"
     striped
     :data="delicaciesData"

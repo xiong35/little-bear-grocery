@@ -1,10 +1,10 @@
 export type DelicaciesData = {
   /** 这餐的名字 */
-  name: string;
+  name?: string;
   /** 在什么时候做这餐 */
   schedule?: number;
   /** 本餐需要的原料 */
-  ingredients: Record<Ingredient["name"], Gram>;
+  ingredients?: Record<Ingredient["name"], Gram>;
 };
 
 /** 个/份 */

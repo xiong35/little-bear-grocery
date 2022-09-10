@@ -19,6 +19,7 @@ function handleEditStart() {
 
 function handleChangeEnd() {
   props.onUpdateValue(inputValue.value);
+  inputValue.value = "";
   isEdit.value = false;
 }
 </script>
