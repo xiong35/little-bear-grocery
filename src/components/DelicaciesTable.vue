@@ -26,7 +26,7 @@ const columns: TableColumns<DelicaciesData> = [
     title: "时间",
     key: "schedule",
     align: "center",
-    width: 150,
+    width: 110,
     render(row, index) {
       return h(NDatePicker, {
         value: row.schedule,
@@ -77,7 +77,6 @@ const columns: TableColumns<DelicaciesData> = [
     :pagination="{ pageSize: 10 }"
     :scrollX="500"
   />
-  <pre>{{ JSON.stringify(delicaciesData, null, 2) }}</pre>
 </template>
 
 <style lang="less">
