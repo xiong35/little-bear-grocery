@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { h } from "vue";
-import { NDataTable, NDatePicker } from "naive-ui";
+import { NDataTable, NDatePicker, NButton } from "naive-ui";
 import ShowOrEdit, { type ShowOrEditProps } from "./ShowOrEdit.vue";
 import type { TableColumns } from "naive-ui/es/data-table/src/interface";
 import { delicaciesData } from "@/data/delicacies";
@@ -15,7 +15,7 @@ const columns: TableColumns<DelicaciesData> = [
     align: "center",
     render(row, index) {
       return h(ShowOrEdit, {
-        value: row.name,
+        value: row?.name || "-",
         onUpdateValue(v) {
           delicaciesData[index].name = v;
         },
@@ -29,7 +29,7 @@ const columns: TableColumns<DelicaciesData> = [
     width: 110,
     render(row, index) {
       return h(NDatePicker, {
-        value: row.schedule,
+        value: row?.schedule,
         size: "small",
         onUpdateValue(v) {
           delicaciesData[index].schedule = v;
@@ -46,7 +46,7 @@ const columns: TableColumns<DelicaciesData> = [
       title: ingred.name,
       width: 70,
       render(row, rowIndex) {
-        const gradNum = row.ingredients[ingred.name] || "-";
+        const gradNum = row?.ingredients?.[ingred.name] || "-";
 
         return h<ShowOrEditProps>(ShowOrEdit, {
           value: gradNum.toString(),
@@ -64,6 +64,26 @@ const columns: TableColumns<DelicaciesData> = [
         });
       },
     })),
+  },
+  {
+    title: "删除",
+    key: "delete",
+    width: 50,
+    align: "center",
+    render(row, index) {
+      return h(
+        NButton,
+        {
+          onClick: () => {
+            delicaciesData.splice(index, 1);
+          },
+          ghost: true,
+        },
+        {
+          default: () => "🗑",
+        }
+      );
+    },
   },
 ];
 </script>
