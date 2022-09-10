@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { delicaciesData } from "@/data/delicacies";
 import DelicaciesTable from "../components/DelicaciesTable.vue";
+import AddOrDropBar from "../components/AddOrDropBar.vue";
 </script>
 
 <template>

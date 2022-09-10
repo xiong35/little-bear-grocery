@@ -12,10 +12,11 @@ const columns: TableColumns<DelicaciesData> = [
     title: "菜品",
     key: "name",
     width: 100,
+    fixed: "left",
     align: "center",
     render(row, index) {
       return h(ShowOrEdit, {
-        value: row?.name || "-",
+        value: row.name || "-",
         onUpdateValue(v) {
           delicaciesData[index].name = v;
         },
@@ -29,7 +30,7 @@ const columns: TableColumns<DelicaciesData> = [
     width: 130,
     render(row, index) {
       return h(NDatePicker, {
-        value: row?.schedule,
+        value: row.schedule,
         size: "small",
         onUpdateValue(v) {
           delicaciesData[index].schedule = v;
@@ -41,32 +42,31 @@ const columns: TableColumns<DelicaciesData> = [
     title: "原料表",
     align: "center",
     key: "ingredients",
-    children: ingredientsData.value
-      .map((ingred) => ({
-        key: ingred.name,
-        title: ingred.name,
-        width: 70,
-        render(row, rowIndex) {
-          const gradNum = row?.ingredients?.[ingred.name] || "-";
+    children: ingredientsData.value.map((ingred) => ({
+      key: ingred.name,
+      title: ingred.name,
+      width: 70,
+      render(row, rowIndex) {
+        const gradNum = row?.ingredients?.[ingred.name] || "-";
 
-          return h<ShowOrEditProps>(ShowOrEdit, {
-            value: gradNum.toString(),
+        return h<ShowOrEditProps>(ShowOrEdit, {
+          value: gradNum.toString(),
+          inputProps: {
             inputProps: {
-              inputProps: {
-                type: "number",
-              },
+              type: "number",
             },
-            onUpdateValue(v) {
-              const number = parseFloat(v);
-              if (isNaN(number)) return;
+          },
+          onUpdateValue(v) {
+            const number = parseFloat(v);
+            if (isNaN(number)) return;
 
-              delicaciesData[rowIndex].ingredients ??= {};
+            delicaciesData[rowIndex].ingredients ??= {};
 
-              delicaciesData[rowIndex].ingredients![ingred.name] = number;
-            },
-          });
-        },
-      })),
+            delicaciesData[rowIndex].ingredients![ingred.name] = number;
+          },
+        });
+      },
+    })),
   },
   {
     title: "删除",

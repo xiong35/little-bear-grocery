@@ -3,7 +3,6 @@ import { h } from "vue";
 import { NDataTable, NButton } from "naive-ui";
 import ShowOrEdit from "./ShowOrEdit.vue";
 import type { TableColumns } from "naive-ui/es/data-table/src/interface";
-import { delicaciesData } from "@/data/delicacies";
 import type { Ingredient } from "@/ts";
 import { rawIngredientsData } from "@/data/ingredients";
 
@@ -11,7 +10,7 @@ const columns: TableColumns<Ingredient> = [
   {
     title: "食材",
     key: "name",
-    width: 150,
+    width: 120,
     align: "center",
     render(row, index) {
       return h(ShowOrEdit, {
@@ -26,7 +25,7 @@ const columns: TableColumns<Ingredient> = [
     title: "每单位重量",
     key: "gramPerUnit",
     align: "center",
-    width: 150,
+    width: 100,
     render(row, index) {
       return h(ShowOrEdit, {
         value: row?.gramPerUnit?.toString() || "-",

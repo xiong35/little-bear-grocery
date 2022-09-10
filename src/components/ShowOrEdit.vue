@@ -11,10 +11,11 @@ export type ShowOrEditProps = {
 const props = defineProps<ShowOrEditProps>();
 
 const isEdit = ref(false);
-const inputValue = ref(props.value === "-" ? "" : props.value);
+const inputValue = ref("");
 
 function handleEditStart() {
   isEdit.value = true;
+  inputValue.value = props.value === "-" ? "" : props.value;
 }
 
 function handleChangeEnd() {

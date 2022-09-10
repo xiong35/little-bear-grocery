@@ -7,7 +7,6 @@ const DELICACIES_KEY = `${TOKEN_PREFIX}-delicacies`;
 
 export function useDelicacies(delicaciesData: typeof _delicaciesData) {
   onMounted(() => {
-    console.log("# use delicacies onMounted", JSON.stringify(delicaciesData));
     const storedDelicaciesDataStr =
       localStorage.getItem(DELICACIES_KEY) || "[]";
 
@@ -27,7 +26,6 @@ export function useDelicacies(delicaciesData: typeof _delicaciesData) {
   watch(
     delicaciesData,
     (newValue) => {
-      console.log("# use delicacies watch", newValue, delicaciesData);
       localStorage.setItem(DELICACIES_KEY, JSON.stringify(newValue));
     },
     { deep: true, immediate: false }

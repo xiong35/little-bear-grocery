@@ -3,8 +3,11 @@ import { RouterLink, RouterView } from "vue-router";
 import { NTabs, NTab } from "naive-ui";
 import { useDelicacies } from "./hooks/delicacies";
 import { delicaciesData } from "./data/delicacies";
+import { useIngredients } from "./hooks/ingredients";
+import { rawIngredientsData } from "./data/ingredients";
 
 useDelicacies(delicaciesData);
+useIngredients(rawIngredientsData);
 </script>
 
 <template>
