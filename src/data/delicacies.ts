@@ -8,9 +8,9 @@ export function sortByTime() {
     if (a.schedule === undefined && b.schedule === undefined) {
       return 0;
     } else if (a.schedule !== undefined && b.schedule !== undefined) {
-      return a.schedule - b.schedule;
+      return b.schedule - a.schedule;
     } else {
-      return a.schedule === undefined ? 1 : -1;
+      return a.schedule === undefined ? -1 : 1;
     }
   });
 }

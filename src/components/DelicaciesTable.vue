@@ -27,7 +27,7 @@ const columns: TableColumns<Delicacies> = [
     title: "时间",
     key: "schedule",
     align: "center",
-    width: 130,
+    width: 145,
     render(row, index) {
       return h(NDatePicker, {
         value: row.schedule,
@@ -41,11 +41,21 @@ const columns: TableColumns<Delicacies> = [
   },
   {
     title: "原料表 / g",
-    align: "center",
     key: "ingredients",
     children: ingredientsData.value.map((ingred) => ({
       key: ingred.name,
-      title: ingred.name,
+      title() {
+        return h(
+          "div",
+          {
+            style: {
+              transform:
+                ingred.name.match(/./gu)!.length > 3 ? "scale(.8)" : undefined,
+            },
+          },
+          ingred.name
+        );
+      },
       width: 70,
       render(row, rowIndex) {
         const gradNum = row?.ingredients?.[ingred.name] || "-";
@@ -102,7 +112,6 @@ const rowKey = (row: Delicacies) => row.name || "";
     :columns="columns"
     striped
     :data="delicaciesData"
-    :pagination="{ pageSize: 10 }"
     :scrollX="500"
   />
 </template>

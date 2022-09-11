@@ -1,14 +1,26 @@
 import { TOKEN_PREFIX } from "@/constants";
 import { onMounted, watch } from "vue";
 
-export function useSyncStorageArray<T>(source: T[], key: string) {
+export function useSyncStorageArray<T>(
+  source: T[],
+  key: string,
+  defaultValue?: T[]
+) {
   key = `${TOKEN_PREFIX}-${key}`;
 
   onMounted(() => {
-    const ataStr = localStorage.getItem(key) || "[]";
+    const dataStr = localStorage.getItem(key);
 
     try {
-      const storedData: T[] = JSON.parse(ataStr);
+      let storedData: T[];
+      if (dataStr) {
+        storedData = JSON.parse(dataStr);
+      } else if (defaultValue) {
+        storedData = defaultValue;
+      } else {
+        storedData = [];
+      }
+
       source.length = 0;
 
       storedData.forEach((data) => {

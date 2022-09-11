@@ -15,8 +15,12 @@ import AddOrDropBar from "../components/AddOrDropBar.vue";
   </div>
 </template>
 
-<style lang="less" scoped>
+<style lang="less">
 .delicacies-view {
   padding: 30px 5px 10px;
+
+  .n-data-table-th {
+    white-space: pre;
+  }
 }
 </style>

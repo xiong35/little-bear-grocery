@@ -25,5 +25,5 @@ export type ToBuy = {
   totalGram: number;
   isBought: boolean;
   buyFrom: "online" | "offline";
-  description: string;
+  description?: string;
 };

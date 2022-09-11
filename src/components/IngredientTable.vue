@@ -68,7 +68,6 @@ const columns: TableColumns<Ingredient> = [
       :columns="columns"
       striped
       :data="rawIngredientsData"
-      :pagination="{ pageSize: 10 }"
     />
   </div>
 </template>

@@ -65,7 +65,8 @@ export function regenerateToBuyData() {
 
     toBuyData.push({
       buyFrom: "offline",
-      description: descriptions.length === 0 ? "-" : descriptions.join("，"),
+      description:
+        descriptions.length === 0 ? undefined : descriptions.join("，"),
       ingredName: ingred,
       isBought: false,
       totalGram,

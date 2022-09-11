@@ -47,6 +47,8 @@ const columns: TableColumns<ToBuy> = [
     width: 50,
     align: "center",
     render(row) {
+      if (!row.description) return row.totalGram;
+
       return h(
         NTooltip,
         {
@@ -62,6 +64,7 @@ const columns: TableColumns<ToBuy> = [
     width: 40,
     align: "center",
     render(row) {
+      if (!row.totalUnits) return "-";
       return row.totalUnits?.toFixed(2);
     },
   },
@@ -96,7 +99,6 @@ function handleCheck(rowKeys: DataTableRowKey[]) {
       "
       striped
       :data="sortedToBuyData"
-      :pagination="{ pageSize: 10 }"
       @update:checkedRowKeys="handleCheck"
     />
   </div>

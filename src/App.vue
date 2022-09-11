@@ -5,9 +5,10 @@ import { delicaciesData } from "./data/delicacies";
 import { rawIngredientsData } from "./data/ingredients";
 import { useSyncStorageArray } from "./hooks/useSyncStorage";
 import { toBuyData } from "./data/toBuy";
+import { defaultIngreds } from "./constants";
 
 useSyncStorageArray(delicaciesData, "delicaciesData");
-useSyncStorageArray(rawIngredientsData, "rawIngredientsData");
+useSyncStorageArray(rawIngredientsData, "rawIngredientsData", defaultIngreds);
 useSyncStorageArray(toBuyData, "toBuyData");
 </script>
 
@@ -52,6 +53,8 @@ a {
 .n-tabs {
   position: fixed;
   top: 0;
+  z-index: 3;
+  background: whitesmoke;
 }
 </style>
 
