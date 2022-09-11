@@ -1,13 +1,14 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from "vue-router";
 import { NTabs, NTab } from "naive-ui";
-import { useDelicacies } from "./hooks/delicacies";
 import { delicaciesData } from "./data/delicacies";
-import { useIngredients } from "./hooks/ingredients";
 import { rawIngredientsData } from "./data/ingredients";
+import { useSyncStorageArray } from "./hooks/useSyncStorage";
+import { toBuyData } from "./data/toBuy";
 
-useDelicacies(delicaciesData);
-useIngredients(rawIngredientsData);
+useSyncStorageArray(delicaciesData, "delicaciesData");
+useSyncStorageArray(rawIngredientsData, "rawIngredientsData");
+useSyncStorageArray(toBuyData, "toBuyData");
 </script>
 
 <template>
