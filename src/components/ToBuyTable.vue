@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { h, ref } from "vue";
+import { h } from "vue";
 import { type DataTableRowKey, NDataTable, NTooltip, NSwitch } from "naive-ui";
 import type { ToBuy } from "@/ts";
 import type { TableColumns } from "naive-ui/es/data-table/src/interface";

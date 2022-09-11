@@ -8,7 +8,10 @@ export const ingredientsData = computed<ValidIngred[]>(() => {
     (i) => i.name !== undefined
   ) as ValidIngred[];
 
-  if (validIngreds.length > 0) return validIngreds;
+  if (validIngreds.length > 0)
+    return validIngreds.sort(
+      (a, b) => (b.lastUsedAt || 0) - (a.lastUsedAt || 0)
+    );
   else return [{ name: "西北风" }];
 });
 

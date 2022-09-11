@@ -1,11 +1,11 @@
 <script lang="ts" setup>
-import { h } from "vue";
+import { h, nextTick } from "vue";
 import { NDataTable, NDatePicker, NButton } from "naive-ui";
 import ShowOrEdit, { type ShowOrEditProps } from "./ShowOrEdit.vue";
 import type { TableColumns } from "naive-ui/es/data-table/src/interface";
-import { delicaciesData } from "@/data/delicacies";
+import { delicaciesData, sortByTime } from "@/data/delicacies";
 import type { Delicacies } from "@/ts";
-import { ingredientsData } from "@/data/ingredients";
+import { ingredientsData, rawIngredientsData } from "@/data/ingredients";
 
 const columns: TableColumns<Delicacies> = [
   {
@@ -34,6 +34,7 @@ const columns: TableColumns<Delicacies> = [
         size: "small",
         onUpdateValue(v) {
           delicaciesData[index].schedule = v;
+          nextTick(sortByTime);
         },
       });
     },
@@ -63,6 +64,8 @@ const columns: TableColumns<Delicacies> = [
             delicaciesData[rowIndex].ingredients ??= {};
 
             delicaciesData[rowIndex].ingredients![ingred.name] = number;
+            rawIngredientsData.find((d) => d.name === ingred.name)!.lastUsedAt =
+              Math.floor(Date.now() / 1000);
           },
         });
       },
