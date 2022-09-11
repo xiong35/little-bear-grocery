@@ -1,6 +1,6 @@
 import { TOKEN_PREFIX } from "@/constants";
 import type { delicaciesData as _delicaciesData } from "@/data/delicacies";
-import type { DelicaciesData } from "@/ts";
+import type { Delicacies } from "@/ts";
 import { onMounted, watch } from "vue";
 
 const DELICACIES_KEY = `${TOKEN_PREFIX}-delicacies`;
@@ -11,7 +11,7 @@ export function useDelicacies(delicaciesData: typeof _delicaciesData) {
       localStorage.getItem(DELICACIES_KEY) || "[]";
 
     try {
-      const storedDelicaciesData: DelicaciesData[] = JSON.parse(
+      const storedDelicaciesData: Delicacies[] = JSON.parse(
         storedDelicaciesDataStr
       );
       delicaciesData.length = 0;

@@ -1,4 +1,4 @@
-export type DelicaciesData = {
+export type Delicacies = {
   /** 这餐的名字 */
   name?: string;
   /** 在什么时候做这餐 */
@@ -17,4 +17,13 @@ export type Ingredient = {
   name?: string;
   gramPerUnit?: number;
   lastUsedAt?: number;
+};
+
+export type ToBuy = {
+  ingredName: string;
+  totalUnits: number;
+  totalGram: number;
+  isBought: boolean;
+  buyFrom: "online" | "offline";
+  description: string;
 };

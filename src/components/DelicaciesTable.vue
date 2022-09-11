@@ -4,10 +4,10 @@ import { NDataTable, NDatePicker, NButton } from "naive-ui";
 import ShowOrEdit, { type ShowOrEditProps } from "./ShowOrEdit.vue";
 import type { TableColumns } from "naive-ui/es/data-table/src/interface";
 import { delicaciesData } from "@/data/delicacies";
-import type { DelicaciesData } from "@/ts";
+import type { Delicacies } from "@/ts";
 import { ingredientsData } from "@/data/ingredients";
 
-const columns: TableColumns<DelicaciesData> = [
+const columns: TableColumns<Delicacies> = [
   {
     title: "菜品",
     key: "name",
@@ -39,7 +39,7 @@ const columns: TableColumns<DelicaciesData> = [
     },
   },
   {
-    title: "原料表",
+    title: "原料表 / g",
     align: "center",
     key: "ingredients",
     children: ingredientsData.value.map((ingred) => ({
@@ -89,11 +89,13 @@ const columns: TableColumns<DelicaciesData> = [
     },
   },
 ];
+
+const rowKey = (row: Delicacies) => row.name || "";
 </script>
 
 <template>
   <NDataTable
-    :key="(((row: any) => row.key) as any as string)"
+    :rowKey="rowKey"
     :columns="columns"
     striped
     :data="delicaciesData"

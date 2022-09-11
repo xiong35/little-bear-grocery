@@ -22,7 +22,7 @@ const columns: TableColumns<Ingredient> = [
     },
   },
   {
-    title: "每单位重量",
+    title: "每单位重量 / g",
     key: "gramPerUnit",
     align: "center",
     width: 100,
@@ -64,7 +64,7 @@ const columns: TableColumns<Ingredient> = [
 <template>
   <div class="ingredient-table">
     <NDataTable
-      :key="(((row: any) => row.key) as any as string)"
+      :key="(row: Ingredient) => row.name || ''"
       :columns="columns"
       striped
       :data="rawIngredientsData"
