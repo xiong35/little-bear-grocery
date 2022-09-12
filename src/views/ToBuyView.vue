@@ -19,10 +19,8 @@ import ToBuyTable from "../components/ToBuyTable.vue";
   </div>
 </template>
 
-<style lang="less" scoped>
+<style lang="less">
 .to-buy-view {
-  // padding: 10px;
-
   .actions {
     display: flex;
     align-items: center;

@@ -32,7 +32,7 @@ defineProps<{
   </div>
 </template>
 
-<style lang="less" scoped>
+<style lang="less">
 .add-or-drop-bar {
   display: flex;
   justify-content: space-evenly;

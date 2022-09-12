@@ -13,9 +13,3 @@ import { rawIngredientsData } from "@/data/ingredients";
     ></AddOrDropBar>
   </div>
 </template>
-
-<style lang="less" scoped>
-.ingredients-settings-view {
-  // padding: 10px;
-}
-</style>

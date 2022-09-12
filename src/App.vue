@@ -34,7 +34,7 @@ useSyncStorageArray(toBuyData, "toBuyData");
   </div>
 </template>
 
-<style lang="less" scoped>
+<style lang="less">
 a {
   color: unset;
   text-decoration: none;
@@ -55,11 +55,5 @@ a {
   top: 0;
   z-index: 3;
   background: whitesmoke;
-}
-</style>
-
-<style>
-body {
-  min-height: 100vh;
 }
 </style>
